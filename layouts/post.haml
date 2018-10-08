@@ -1,0 +1,12 @@
+#post
+  %h1
+    = item[:title]
+  - if item.attributes.has_key?(:created_at) 
+    %aside.posted_at
+      = 'Posted at ' + item[:created_at]
+  - if item.attributes.has_key?(:abstract)
+    %aside.abstract
+      <b>Abstract:</b>
+      = item[:abstract]
+  %article
+    = yield

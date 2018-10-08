@@ -1,0 +1,117 @@
+---
+layout: post
+title:  "A Definition for Alzheimer's Disease"
+date:   2017-10-23 
+categories: Biology
+---
+
+A few months ago, I realized I wanted to contribute towards finding a cure for Alzheimer’s disease (AD). 
+To start, I fell back on one of my guiding principles as a scientist -- that to find solutions to complex problems,
+one has to first understand the problem at a basic, fundamental level. 
+
+So in this blog post, I want to start from the basics and answer one seemingly simple question. 
+
+> What is Alzheimer's disease?
+
+## Searching for a definition for Alzheimer’s Disease
+
+The majority of us know Alzheimer’s to be a neurodegenerative disease that causes gradual memory loss, speech problems 
+and a loss of motor skills. A physician might provide a more sophisticated answer to my question.
+
+> Alzheimer’s is a neurodegenerative disease marked by a host of disease phenotypes such as neuron death 
+> and the abnormal accumulation of amyloid-beta plaques and neurofibrillary tangles.
+
+It turns out that this is the definition given by the National Institute of Aging for diagnoising AD and the definition
+that is generally accepted by the scientific community [^1]. Unfortunately, this is a definition with which I am 
+unsatisfied. 
+
+## Biological Roots of Alzheimer’s Disease
+
+I am going to challenge our existing definition for diagnosing Alzheimer’s, but first I want to provide some historical
+background on Alzheimer’s that will motivate my challenge.
+
+Alzheimer's disease originated from a series of observations made in the last decade in which a certain 
+class of patients seemed to die from a series of brain-related disease symptoms (loss of memory, decline in speech, 
+cognitive impairment). Because the dominant disease symptoms in these patients were linked to cognitive function, 
+a natural starting point for understanding this trend was to examine post-mortem brain-tissue samples to try and 
+identify biological anomalies that did not occur in otherwise healthy brains. 
+
+Interestingly, there was a common thread among these patients -- consistent biological artifacts that were present in 
+disease brains, but not present in healthy brains! It turned out that disease brains exhibited much more 
+neuron death than healthy brains. We eventually realized that disease brains to contain an overabundance of a certain 
+peptide called amyloid-beta as well as neurofibrillary tangles (aggregates of hyperphosphorylated tau protein). 
+
+![Healthy Brain vs. Alzheimer's Brain]({{ "/assets/biology/alzheimers_brain_comparison.jpg" | absolute_url }})
+
+*Image courtersy of http://neurosciencenews.com/* 
+
+While the exact function of these two biological structures (amyloid-beta ad neurofibrillary tangles) is not know, 
+we suspect they play a role in synaptic activity and modulating neuron signaling. In a future post, 
+I will explain the technical details behind amyloid-beta and neurofibrillary tangles and their connection to 
+Alzheimer’s disease. For now, it suffices to know that amyloid-beta and neurofibrillary tangles are abnormally abundant 
+in the post-mortem brains of patients who exhibited serious brain-related disease symptoms. [^2]
+
+Therefore when someone is diagnosed with Alzheimer’s disease, we are saying that this person has started to show 
+some signs of cognitive decline and that if we could hypothetically dissect his/her brain we would expect 
+to find abnormally large deposits of amyloid-beta and neurofibrillary tangles. 
+
+## Reaching towards a more precise definition
+ 
+Recall, the currently accepted definition of Alzheimer’s is given as follows 
+
+> Alzheimer’s is a neurodegenerative disease marked by a host of disease phenotypes such as neuron death and 
+> the abnormal accumulation of amyloid-beta plaques and neurofibrillary tangles.
+
+Frankly, I find the above definition discomforting because it is imprecise. 
+To illustrate, consider the following ambiguities that our working definition does not resolve. 
+
+- What defines memory loss? 
+- At what point, is memory loss severe enough to fall under the purview of Alzheimer’s disease?
+- What defines abnormal accumulation of amyloid-beta plaques and neurofibrillary tangles?
+
+I would been far more satisfied to hear a definition more along of the lines of the following.
+
+> A person is diagnosed with Alzheimer’s disease when the measure of amyloid-beta peptides 
+> exceeds X threshold, sparking neuron death and disruption of cellular signaling pathways 
+> linked to cognitive decline and memory loss.
+
+Notice the difference. The new definition resolves the underlying ambiguities by assigning a well-defined criterion 
+(amyloid-beta exceeds X threshold) for diagnosing Alzheimer’s. In effect, diagnosing Alzheimer’s no longer 
+invites a “maybe” response, but rather an explicit “yes / no” response. 
+
+So am I missing something here? Why have we not adopted more precision in our definition for Alzheimer’s? 
+
+## Intractability of Precise Definitions 
+
+Tragically, our lack of precision reflects both a weakness in understanding the mechanisms of Alzheimer’s. 
+Implicitly, this weakness in understanding also stems from the reality that the current state of biomedical 
+technology simply cannot answer the questions needed to acquire a nuanced understanding of Alzheimer’s. 
+
+Let me explain. The crux of the ideal definition I put forward involves being able to assert a key phenomenon about 
+Alzheimer’s -- that past a certain threshold, amyloid-beta peptides causes Alzheimer’s. Unfortunately, the current 
+state of research simply does not permit us to make any conclusive assertions required for this precise definition. 
+We know amyloid-beta and neurofibrillary tangles are correlated with Alzheimer’s, but we have a hard time showing 
+that there exists a causal relationship. 
+
+The difficulty of establishing a causal relationship immediately surfaces when I think reaching towards more 
+precise definitions. For a complex disease like Alzheimer’s that is characterized by interdependent 
+biological processes, I suspect the amount of data (brain-tissue samples, genomic sequences) needed to derive 
+rigorous conclusions to even the simplest hypotheses involving amyloid-beta and neurofibrillary-tangles is 
+prohibitively large. In other words, we will need massive breakthroughs in data-collection, statistical-processing 
+and disease modeling to reach the description of Alzheimer’s that assuages my initial criticism. 
+
+## Concluding Thoughts
+In that vein, I arrive at a more refined perspective than the one with which I originally begun. 
+My initial criticisms of imprecision are still valid and our present definitions leave me wanting more. 
+Nevertheless, I acknowledge that I currently have no good solutions for addressing my criticisms and until we 
+make some massive scientific breakthroughs, we will not arrive at that precise definition that I seek. 
+
+### References
+
+[^1]: National Institute on Aging–Alzheimer’s Association guidelines for the neuropathologic assessment of Alzheimer’s disease [(link)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3266529)
+
+[^2]: Road to Restoring Neural Circuits for Treatment of Alzheimer’s Disease [(link)](https://www.ncbi.nlm.nih.gov/pubmed/27830780)
+
+
+
+

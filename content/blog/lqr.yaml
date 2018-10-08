@@ -1,0 +1,5 @@
+title: Linear Quadratic Regulator
+kind: article
+created_at: 2018-10-07 20:18
+abstract: LQR is an trajectory optimization algorithm used to solve control problems with quadratic costs and linear dynamics.
+short_url: lqr

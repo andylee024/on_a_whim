@@ -1,0 +1,112 @@
+One of the most powerful ideas from optimal control is the Linear-Quadratic Regulator (LQR), which is a classic algorithm used to optimally solve a simple class of control problems characterized by linear dynamics and quadratic costs.
+
+# Trajectory Optimization
+Consider a discrete-time dynamics model for state, control pair $(x,u)$.
+\begin{equation}
+x_{t+1} = f(x_{t}, u_{t})
+\end{equation}
+Let $U$ be a control sequence $\{u_{0}, u_{1}, \cdots, u_{n}\}$. The total cost $J$ is defined to be the sum of intermediate costs $c_{t}$ and a terminal cost $c_{n}$.
+\begin{equation}
+J(x_{0}, U) = \sum_{t=0}^{n-1}c_{t}(x_{t}, u_{t}) + c_{n}(x_{n})
+\end{equation}
+The solution to the optimal control problem is a control sequence that minimizes total cost.
+\begin{equation}
+U^{*} \equiv \text{argmin}_{U} J(x,U)
+\end{equation}
+
+# LQR Problem
+The linear-quadratic regulator considers a special class of optimal control problems where the cost is quadratic and dynamics function is linear. Why these assumptions you ask? It turns out that these two assumptions allow us to derive closed-form solutions for an optimal sequence of controls. In other words, these two assumptions allow us to solve the optimal control very efficiently. In a later post, we will introduce a more general approach called differential-dynamic programming, which allows us to handle cases where we relax the costs to be non-quadratic and dynamics to be non-linear.
+
+  -  Let $x \in \mathbb{R}^{n}$ denote state.
+  - Let $u \in \mathbb{R}^{m}$ denote control.
+  - Let $A \in \mathbb{R}^{n \times n}$, $B \in \mathbb{R}^{m \times n}$ be state transition matrices.
+  - Let $Q \in \mathbb{R}^{n \times n}$, $R \in \mathbb{R}^{m \times m}$ be cost matrices assumed to be positive semi-definite.
+
+Formally, we can express the LQR problem as the following optimization problem.
+
+\begin{equation}
+\min_{U} \sum_{t=0}^{n-1}\bigg( x_{t}^{T}Qx_{t} + u^{T}_{t}Ru_{t}\bigg) + x_{n}^{T}Q_{n}x_{n} \\
+\text{subject to} \\ x_{t+1} = Ax_{t} + Bu_{t}
+\end{equation}
+
+By formulating the problem as such, we encoded the quadratic-cost requirement. Additionally, we have forced our dynamics function governing state transitions to be linear. That's it! The LQR problem formulated as a simple, straightforward optimization problem.
+
+# Solving LQR
+LQR admits an elegant closed-form solution via dynamic programming for the abovementioned problem statement. In this section, we derive the LQR solution.
+
+## Cost to Go
+To derive this solution, we must first define the *cost-to-go* function, denoted $V_{t}(x)$. This cost-to-go is a common concept in optimal control used to recast optimization problems in terms of dynamic programming. 
+\begin{equation}
+V_{t}(x) = \min\limits_{u_{t}, \cdots u_{n-1}} \sum_{i=t}^{n-1}\bigg(x_{t}^{T}Qx_{t} + u_{t}^{T}Ru_{t}\bigg) + x_{n}^{T}Q_{n}x_{n} 
+\end{equation}
+Compactly, we can express this concept recursively.
+\begin{equation}
+V_{t+1}(x) = \min_{u} \bigg\{ x^{T}Qx + u^{T}Ru + V_{t}(x') \bigg\}
+\end{equation}
+\begin{equation}
+x' = Ax + Bu
+\end{equation}
+Intuitively, the cost-to-go for state $x$ yields the minimum cost incurred among all future controls given that one's trajectory begins at state $x$. Those familiar with reinforcement learning(RL) will immediately realize that the cost-to-go function is equivalent to the *state-value function* in RL. The reason we specify the cost-to-go function is to interpret the LQR objective recursively, thereby permitting a dynamic programming solution.
+
+
+## A Dynamic Programming Solution To LQR
+In general, dynamic programming works by iteratively solving smaller instances of subproblems enroute to generating a solution to the initial problem. In the case of LQR, we will apply this principle by solving for optimal controls backwards in time (i.e. $u_{n-1} \to u_{0}$). Let's start by communicating the main result and I will follow up by providing some intuition about how we derived this main result.
+
+**Proposition ** 
+*Fix state variable* $x$ *and let*
+$$ u^{*}= (B^{T}P_{t}B + R)^{-1}(B^{T}P_{t}A)$$
+*where* $P_{t}$ *is some positive semidefinite matrix, then* $u^{*}$ *is the optimal control that minimizes the following objective*
+$$ G(u) = x^{T}Qx + u^{T}Ru + V_{t}(Ax + Bu) $$ 
+
+**Proof** 
+Consider the gradient $\nabla_{u}G$. 
+$$\nabla_{u}G = \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}(V_{t}(Ax + Bu)) $$
+The recursive solution to $V_{t}(\cdot)$ takes the quadratic form,  $x_{t}P_{t}x_{t}$, where $P_{t}$ is semipositive-definite. Substituting this solution in, we obtain
+
+
+$$
+\begin{align*}
+\nabla_{u}G &= \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}\bigg((Ax+Bu)^{T}P_{t}(Ax+Bu)\bigg) \\
+&= 0 + 2u^{T}R + \frac{\partial}{\partial u}\bigg(u^{T}B^{T}P_{t}Bu + x^{T}AP_{t}Ax + 2(u^{T}B^{T}P_{t}Ax)\bigg) \text{ (by claim 1.1) }\\
+&= 2u^{T}R + \frac{\partial}{\partial u}(u^{T}B^{T}P_{t}Bu) + \frac{\partial}{\partial u}(x^{T}AP_{t}Ax) + \frac{\partial}{\partial u}2(u^{T}B^{T}P_{t}Ax) \\
+&= 2u^{T}R + 2u^{T}B^{T}P_{t}B + 2B^{T}P_{t}Ax
+\end{align*}
+$$
+
+Now if we set the gradient to $0$, we can solve for $u^{*}$. Note that $u^{*}$ is the optimal solution for $u_{t}$. After working the solution out, we arrive at the following set of equations.
+\begin{align}
+u^{*} &= K_{t}x \\
+K_{t} &= -(R + B^{T}P_{t}B)^{-1}(B^{T}P_{t}Ax) \blacksquare
+\end{align}
+
+## Solution Intuitions
+If you're like me when I first read the proof, then I was a bit unsatisfied. Yes, the algebra works out, but the proof that I gave provides no interesting insight as to why this solution is the way it is. To that end, let me add my interpretation of why this elegant solution for LQR falls out naturally. 
+
+### Insight 1: Casting the problem as a dynamic progamming problem
+Recall that one of our first steps was to define the cost-to-go function, which implicitly formulates the problem as one of dynamic programming. While this does not communicate an immediate, casting the problem in this light does provide a hint: *that one can solve this problem iterative*. This prompts the question: what is the particular structure of LQR that invites an iterative approach?
+
+### Insight 2: The cost-to-go function can be easily computed at each iteration
+I honestly believe this is the key insight and the reason the LQR is such a beautiful concept. In the appendix, I provide a proof for why the value function maintains a quadratic structure $x^{T}Px$ assuming that the value function of the next time-step is also quadratic. The fact that the cost-to-go is quadratic at every single time step from $t = n \to 0$ stems from the structure that we enforce in LQR (i.e. quadratic-cost and linear dynamics). In fact, if you look closely at the proof in the appendix, you will see that we exploit these facts as we derive the result. Hence, under the premise of LQR, optimal controls at each time step can be computed in closed-form using just matrix multiplications, making this algorithm efficient and powerful.
+
+# Appendix
+**Claim 1.1 ** *Let* $P_{t}$ *be positive semidefinite matrix. Then* 
+\begin{equation}
+(Ax+Bu)^{T}P_{t}(Ax+Bu) = (u^{T}B^{T}P_{t}Bu) + (x^{T}AP_{t}Ax) + 2(u^{T}B^{T}P_{t}Ax) 
+\end{equation}
+
+**Proof** 
+First note that the expression $(Ax+Bu)^{T}P_{t}(Ax+Bu)$ is in quadratic-form and quadratic-forms preserve symmetry. Consider the expansion of this matrix. 
+$$
+\begin{align*}
+(Ax+Bu)^{T}P_{t}(Ax+Bu) = (x^{T}A^{T}P_{t}Bu) + (u^{T}B^{T}P_{t}Bu) + (x^{T}AP_{t}Ax) + (u^{T}B^{T}P_{t}Ax)
+\end{align*}
+$$
+Note that every term in the expansion must be symmetric because symmetry is preserved under matrix addition. Furthermore, recall that for any symmetric matrix $H$, the following hold $H = H^{T}$. This means we can freely take the transpose of any term in the summation without changing its value. 
+$$
+\begin{align*}
+(Ax+Bu)^{T}P_{t}(Ax+Bu) &= (x^{T}A^{T}P_{t}Bu) + (u^{T}B^{T}P_{t}Bu) + (x^{T}AP_{t}Ax) + (u^{T}B^{T}P_{t}Ax) \\
+&=  (x^{T}A^{T}P_{t}Bu) + (u^{T}B^{T}P_{t}Bu)+ (x^{T}AP_{t}Ax)  +  (u^{T}B^{T}P_{t}Ax)^{T} \\
+&=(u^{T}B^{T}P_{t}Bu) + (x^{T}AP_{t}Ax) + 2(x^{T}A^{T}P_{t}Bu) \blacksquare
+\end{align*}
+$$
+I will add a remark that this claim is useful in the LQR setting by showing this claim also holds in the base case for $t=n$. This is true by simply noting the terminal cost is $c_{n} = x^{T}Q_{n}x$.

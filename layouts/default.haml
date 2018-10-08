@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+%html(lang="en")
+  %head
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+    = extra_asset_links
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    %meta{:name => "generator", :content => 'nanoc ' + Nanoc::VERSION}
+
+    %title
+      = @item[:title]
+      [On a Whim]
+
+  %body
+
+    #title
+      = link_to_unless_current 'On a Whim', '/', :title => 'Main page'
+      #nav
+        %ul
+          %li
+            = link_to_unless_current 'About', '/about/', :title => 'About the author, the website, etc.'
+          %li
+            = link_to_unless_current 'Technical Content', '/blog/', :title => 'Technical Content'
+          %li
+            = link_to_unless_current 'Startup Content', '/startup_blog/', :title => "Startup Content"
+    %hr
+
+    #main
+      = yield
+

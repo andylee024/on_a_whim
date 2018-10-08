@@ -1,0 +1,10 @@
+#blog-listing
+  - sorted_articles.each do |post|
+    .post
+      %h2
+        = link_to post[:title], post.path
+      - if post.attributes.has_key?(:abstract)
+        %aside.abstract
+          = post[:abstract]
+      %aside.posted_at
+        = 'Posted at ' + post[:created_at]

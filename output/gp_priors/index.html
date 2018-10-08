@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+<script type='text/javascript' src='/assets/js/jstat.js'></script>
+<script type='text/javascript' src='/assets/js/linear_algebra.js'></script>
+<script type='text/javascript' src='/assets/js/covariance.js'></script>
+<script type='text/javascript' src='/assets/js/animation.js'></script>
+<script type='text/javascript' src='/assets/js/jquery.js'></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-47801434-1', 'chogg.name');
+  ga('send', 'pageview');
+</script>
+<meta content='nanoc 4.9.9' name='generator'>
+<title>
+Animated visualizations of Gaussian Process priors
+[Charles R. Hogg III]
+</title>
+</head>
+<body>
+<div id='title'>
+<a title="Main page" href="/">Charles R. Hogg III</a>
+<div id='nav'>
+<ul>
+<li>
+<a title="About the author, the website, etc." href="/about/">About</a>
+</li>
+<li>
+<a title="Personal blog" href="/blog/">Blog</a>
+</li>
+<li>
+<a title="Things I'm working on" href="/projects/">Projects</a>
+</li>
+<li>
+<a title="Ways to contact me online" href="/contact/">Contact</a>
+</li>
+</ul>
+</div>
+</div>
+<hr>
+<div id='main'>
+<div id="chart_independent">
+
+</div>
+<div id="chart_exp">
+
+</div>
+<div id="chart_SE">
+
+</div>
+<script type='text/javascript'>
+// Load the Visualization API.
+google.load('visualization', '1.0', {'packages':['corechart']});
+// Set a callback to run when the Google Visualization API is loaded.
+var myChart = null;
+google.setOnLoadCallback(loaded);
+
+// Global variables I might find useful.
+var x = Sequence(0, 8, 101);
+
+function loaded() {
+  independentChart = AnimatedChart(
+      DatasetGenerator(x, jStat(x).multiply(0), Independent(1), 25),
+      'chart_independent',
+      'Independent datapoints (uncorrelated)',
+      google.visualization.ScatterChart);
+  independentChart.start();
+
+  expChart = AnimatedChart(
+      DatasetGenerator(x, jStat(x).multiply(0), Exponential(1, 1), 25),
+      'chart_exp',
+      'Exponential covariance');
+  expChart.start();
+
+  SEChart = AnimatedChart(
+      DatasetGenerator(x, jStat(x).multiply(0), SquaredExponential(1, 1), 25),
+      'chart_SE',
+      'Squared Exponential covariance');
+  SEChart.start();
+};
+</script>
+
+</div>
+<div id='source'>
+<a href='https://github.com/chiphogg/chogg_name/tree/master/content/gp_priors/index.pandoc'>
+Page source on GitHub
+</a>
+</div>
+</body>
+</html>

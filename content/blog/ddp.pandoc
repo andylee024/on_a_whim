@@ -1,0 +1,167 @@
+Differential Dynamic Programming refers to a general class of optimal control algorithms that rely on iteratively solving finite-horizon discrete-time control problems using locally quadratic models of cost and dynamics.
+
+# Trajectory Optimization
+Consider a discrete-time dynamics model for state, control pair $(x,u)$.
+\begin{equation}
+x_{t+1} = f(x_{t}, u_{t})
+\end{equation}
+Let $U$ be a control sequence $\{u_{0}, u_{1}, \cdots, u_{n}\}$. The total cost $J$ is defined to be the sum of intermediate costs $l$ and a terminal cost $l_f$.
+\begin{equation}
+J(x_{0}, U) = \sum_{t=0}^{n-1}l(x_{t}, u_{t}) + l_{f}(x_{n})
+\end{equation}
+The solution to the optimal control problem is a control sequence that minimizes total cost.
+\begin{equation}
+U^{*} \equiv \text{argmin}_{U} J(x,U)
+\end{equation}
+
+# Differential Dynamic Programming (Framework)
+Previously, we covered the LQR (Linear Quadratic Algorithm - add link!) for solving the optimal control problems. Whereas LQR required the cost be quadratic and the dynamics be linear, DDP makes no such assumptions. In that vein, DDP can be thought of as a general framework for solving optimal control problems. DDP works by constructing local approximations to cost and dynamics and iteratively solving for the optimal control sequence backwards in time recursively. In pratice, DDP works extremely well and can handle problems with complex costs and dynamics.
+
+## DDP Preliminaries
+Let $U_{i} = \{u_{i}, u_{i+1}, \cdots u_{n-1}\}$ be the control sequence starting at time $i$. Define the \textbf{cost-to-go} $J_{i}$ as the partial sum of costs from $i \to n$. 
+\begin{equation}
+J_{i}(x, U_{i}) = \sum_{t=i}^{n-1}l(x_{t}, u_{t}) + l_{f}(x_{n})
+\end{equation} 
+Define the **value function** $V(x, i)$ to be the cost-to-go evaluated for a fixed state and optimal control sequence. The value function expresses a theoretical minimum on cost for visiting some state $x$.
+\begin{equation}
+V(x, i) = \min_{U_{i}} J_{i}(x, U_{i})
+\end{equation}
+
+## "Dynamic" in DDP
+DDP algorithms solve the optimal control problem by reducing the global problem of finding an optimal control sequence to a series of smaller minimization problems. This is done by recursively solving the value-function for a single optimal control, proceeding backwards in time, hence the name dynamic programming.
+$$
+\begin{align}
+V(x, i) &= \min_{u} \bigg[l(x, u) + V(f(x, u), i+1) \bigg] \text{, (backwards recursive-step)}\\
+V(x, n) &= l_{f}(x)  \text{, (base case)}
+\end{align}
+$$
+The power of the value function is that it allows us to cast the optimal control problem as a dynamic programming problem. DDP algorithms aims to solve this dynamic programming problem using an interative procedure to obtain a the minimizing control at any given time step and recursing backwards in time to obtain the full sequence of controls.
+
+## "Differential" in DDP
+In the case of DDP, we typically optimize with respect to some nominal trajectory 
+$$\hat{\tau} = \{(\hat{x_{0}}, \hat{u_{0}}), (\hat{x_{1}}, \hat{u_{1}}), \cdots, (\hat{x_{n-1}}, \hat{u_{n-1}})\}$$
+Define $(x_{i}^{*}, u_{i}^{*})$ be optimal state, control pair for time-step $i$. Then we define optimal perturbations $(\delta x_{i}^{*}, \delta u_{i}^{*})$ as follows.
+$$
+\begin{align*}
+x_{i}^{*} &= \hat{x_{i}} + \delta x_{i}^{*} \\
+u_{i}^{*} &= \hat{u_{i}} + \delta u_{i}^{*}
+\end{align*}
+$$
+We can now recast our original optimization problem of finding the optimal control sequence to a separate, but equivalent problem of finding the optimal control perturbation on some nominal trajectory. Note the equivalence of the following two value functions.
+$$
+\begin{align}
+V(x, i) &= \min_{u} \bigg[l(x, u) + V(f(x, u), i+1) \bigg] \\
+V(x, i) &= \min_{\delta u} \bigg[l(\hat{x} + \delta x, \hat{u} + \delta u) + V(f(\hat{x} + \delta x, \hat{u} + \delta u), i+1) \bigg]
+\end{align}
+$$
+The key insight to note is that we now have a general formulation of the optimal-control problem in terms of perturbations on some nominal trajectory $\hat{\tau}$, hence the name differential.
+
+## Q-function
+There is one more concept we need to introduce before we can discuss DDP methods. That concept is the **Q-function**. Define the Q-function as \footnote{Note we drop the index $i$ in $V(x, i)$ for brevity}
+
+\begin{equation}
+Q(\delta x, \delta u) = \bigg(l(\hat{x} + \delta x, \hat{u} + \delta u) - l(\hat{x}, \hat{u})\bigg)
++ \bigg(V(f(\hat{x} + \delta x, \hat{u} + \delta u) - V(f(\hat{x}, \hat{u}) \bigg)
+\end{equation}
+
+The Q-function is a scalar function taking vector inputs and it expresses the change in cost that results from perturbing a point in the nominal trajectory $(\hat{x}, \hat{u})$ by $(\delta x, \delta u)$. The goal of any DDP algorithm is to find perturbations that minimize the Q-function. In short, the objective of any DDP algorithm is to solve the particular minimization problem expressed as the Q-function.
+
+We will use the following notation for derivatives of the Q-function. Also note that we will use similar subscript notation to denote derivatives for value function $V$, dynamics equation $f$ and cost function $l$.
+
+$$
+\begin{align*}
+Q_{x} \equiv \frac{\partial}{\partial x} Q \text{ and } Q_{xx} \equiv \frac{\partial}{\partial x}\frac{\partial}{\partial x} Q \\
+Q_{u} \equiv \frac{\partial}{\partial u} Q \text{ and } Q_{uu} \equiv \frac{\partial}{\partial u}\frac{\partial}{\partial u} Q \\
+Q_{ux} \equiv \frac{\partial}{\partial u}\frac{\partial}{\partial x} Q
+\end{align*}
+$$
+Note the second-order Taylor approximation to the Q-function will be a central for understanding DDP so we introduce it here. This approximation can be conpactly expressed in the following matrix-form.
+
+\begin{equation}
+Q(\delta x, \delta u) \approx \begin{bmatrix}
+1 \\
+\delta x \\
+\delta u
+\end{bmatrix}^{T}
+\begin{bmatrix}
+0 & Q_{x}^{T} & Q_{u}^{T} \\
+Q_{x} & Q_{xx} & Q_{xu} \\
+Q_{u} & Q_{ux} & Q_{uu}
+\end{bmatrix}
+\begin{bmatrix}
+1 \\
+\delta x \\
+\delta u
+\end{bmatrix}
+\end{equation}
+
+The expansion coefficients are given as follows.\footnote{We use primes to denote next time step. $V' \equiv V(i+1)$}
+
+$$
+\begin{align}
+Q_{x} &= l_{x} + f_{x}^{T}V_{x}'\\
+Q_{u} &= l_{x} + f_{u}^{T}V_{x}' \\
+Q_{xx} &= l_{xx} + f_{x}^{T}V_{xx}'f_{x} + V_{x}'f_{xx} \\
+Q_{uu} &= l_{uu} + f_{u}^{T}V_{xx}'f_{u} + V_{x}'f_{uu} \\
+Q_{ux} &= l_{ux} + f_{u}^{T}V_{xx}'f_{x} + V_{x}'f_{ux}
+\end{align}
+$$
+
+# Differential Dynamic Programming (Algorithm)
+I like to think of DDP (Differential Dynamic Programming) as both a framework and an algorithm. DDP is a framework because it formulates the optimal control problem as a dynamic programming problem under the context of looking for minimizing state and control differentials $(\delta x, \delta u)$. Simultaneously, DDP is an algorithm because it solves this problem by taking a particular approach which is to quadratically approximating the costs and dynamics, enabling efficient solutions. In the prevoius section, we described DDP framework and in this section, we will describe the algorithmic steps of DDP. In general, the DDP algorithm can be decomposed into 3 steps: backward-pass, forward-pass and line search.
+
+## Backward Pass
+To obtain optimal controls, we need to minimize the Q-function w.r.t $\delta u$. This turns out to have a closed form-solution. We obtain $\delta u^{*}$ by solving $\frac{\partial Q}{\partial \delta u} =0$ for $\delta u$.
+
+$$
+\begin{align}
+\delta u^{*} &= \text{arg}\min_{\delta u} Q(\delta x, \delta u) \\
+&= -Q_{uu}^{-1}(Q_{u} + Q_{ux}\delta x)
+\end{align}
+$$
+
+By initializing the value-function $V(x, n) = l_{f}(x)$, we can solve the dynamic programming problem efficiently backwards in time. To see this, observe that at $t=n$, we can compute all partial derivatives $\{Q_{x}, Q_{u}, Q_{xx}, Q_{uu}, Q_{xu}\}$, allowing us to obtain the $\delta u^{*}$  for $t=n-1$ using equation (14).
+Recall that the value function can be expressed in terms of Q-function.
+
+$$
+\begin{align*}
+V(\delta x) &= \min_{\delta u} Q(\delta x, \delta u) \\
+&= Q(\delta x, \delta u^{*})
+\end{align*}
+$$
+This relationship is relevant because it indicates that $\delta u^{*}$ for $t=n-1$ can be substituted back into the original Q-function to obtain the value function $V(\delta x, n-1)$. Note that this value-function can then be used to seed the optimization of the next round $t=n-2$ using the following update equations.
+
+$$
+\begin{align}
+\Delta V(i) &= -\frac{1}{2}Q_{u}Q_{uu}^{-1}Q_{u} \\
+V_{x}(i)  &= Q_{x} - Q_{u}Q_{uu}^{-1}Q_{ux} \\
+V_{xx}(i) &= Q_{xx} - Q_{xu}Q_{uu}^{-1}Q_{ux}
+\end{align}
+$$
+This process repeats until we arrive at $t=0$ and is called the \textbf{backwards recursion} or \textbf{backwards pass} in DDP.
+
+## Forward Pass
+Note that the backward pass step does not actually give an optimal control sequence $u^{*}$. Rather, it provides a control policy as a function of $\delta x$. Therefore, after the backward pass is complete, we must perform a forward pass to compute a new trajectory. To compute a new optimal trajectory $\tau^{*}$ we perform the following forward update equations.
+
+$$
+\begin{align}
+{x}^{*}_{0} &= \hat{x}_{0} \\
+{u}^{*}_{i} &= -Q_{uu}^{-1}(Q_{u} + Q_{ux}({x}^{*}_{i} - \hat{x}_{i})) \\
+{x}^{*}_{i+1} &= f({x}^{*}_{i}, {u}^{*}_{i})
+\end{align}
+$$
+
+## Line Search
+Recall, iLQR generates an optimal control policy under two simplifying assumptions: quadratically-approximate the cost function and linearly-approximate the dynamics. These assumptions allow iLQR to converge quickly to an optimal trajectory. The actual cost-function is non-quadratic and the dynamics are non-linear so the optimal controls generated by iLQR is only valid if they are within a small-region near the nominal controls such that quadratic and linear approximations hold.\\
+Backtracking line-search is a technique employed to ensure that the generated trajectory converges to a local minimum. To do that, we introduce a step-size parameter $\alpha$ that is applied to the control policy in order to regularize the trajectory and ensure our new trajectory is lower cost. Concretely, we make a minor modification to the forward pass when computing optimal controls and compute a new trajectory $\tau_{\alpha}$.
+$$
+\begin{align}
+u_{i}^{(\alpha)} &= \alpha \cdot \pi_{i}(\delta x_{i})\\
+\tau_{\alpha} &= \{(x_{0}^{(\alpha)},u_{0}^{(\alpha)}), (x_{1}^{(\alpha)},u_{1}^{(\alpha)}), \cdots, x_{n}^{(\alpha)} \}
+\end{align}
+$$
+Let $\mathcal{L}$ denote the trajectory cost and $\hat{\tau}$ denote the nominal trajectory. Our algorithm continues to decrease $\alpha$ until the following condition is met.
+\begin{equation}
+\mathcal{L}(\tau_{\alpha}) < \mathcal{L}(\hat{\tau})
+\end{equation}
+

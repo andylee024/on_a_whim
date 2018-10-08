@@ -1,0 +1,545 @@
+{:	data{o:Nanoc::Identifier:
+@type:legacy:@stringI"/about/:ET{:default{	:	lastU:Nanoc::Int::TextualContent[0I"�<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta content='nanoc 4.9.9' name='generator'>
+<title>
+About
+[On a Whim]
+</title>
+</head>
+<body>
+<div id='title'>
+<a title="Main page" href="/">On a Whim</a>
+<div id='nav'>
+<ul>
+<li>
+<span class="active">About</span>
+</li>
+<li>
+<a title="Technical Content" href="/blog/">Technical Content</a>
+</li>
+<li>
+<a title="Startup Content" href="/startup_blog/">Startup Content</a>
+</li>
+</ul>
+</div>
+</div>
+<hr>
+<div id='main'>
+<h2 id="experience">Experience</h2>
+<ul>
+<li>Autonomy Engineer (Motion Planning) at Uber’s Advanced Technologies Group.</li>
+<li>Startup Founder of Ikigai, computational drug-discovery for Alzheimer’s (accepted YCombinator 2018).</li>
+<li>Staff Scientist, Neurogenomics Laboratory, Carnegie Mellon University.</li>
+</ul>
+<h2 id="education">Education</h2>
+<ul>
+<li>BA in Mathematics, Swarthmore College (2016)</li>
+</ul>
+<h2 id="for-potential-collaborators-and-employers">For Potential Collaborators and Employers</h2>
+<p>Think of this blog as a portfolio of my startup and technical work.</p>
+
+</div>
+</body>
+</html>
+;
+T:rawU;[I"8/Users/andy/Projects/on_a_whim/content/about.pandoc;
+TI"�## Experience
+- Autonomy Engineer (Motion Planning) at Uber's Advanced Technologies Group.
+- Startup Founder of Ikigai, computational drug-discovery for Alzheimer's (accepted YCombinator 2018).
+- Staff Scientist, Neurogenomics Laboratory, Carnegie Mellon University.
+
+## Education
+- BA in Mathematics, Swarthmore College (2016)
+
+## For Potential Collaborators and Employers
+Think of this blog as a portfolio of my startup and technical work.
+;
+T:preU;[0I"U<h2 id="experience">Experience</h2>
+<ul>
+<li>Autonomy Engineer (Motion Planning) at Uber’s Advanced Technologies Group.</li>
+<li>Startup Founder of Ikigai, computational drug-discovery for Alzheimer’s (accepted YCombinator 2018).</li>
+<li>Staff Scientist, Neurogenomics Laboratory, Carnegie Mellon University.</li>
+</ul>
+<h2 id="education">Education</h2>
+<ul>
+<li>BA in Mathematics, Swarthmore College (2016)</li>
+</ul>
+<h2 id="for-potential-collaborators-and-employers">For Potential Collaborators and Employers</h2>
+<p>Think of this blog as a portfolio of my startup and technical work.</p>
+;
+T:	post@o;;;;	I"/blog/;
+T{;{	;U;[0I"t<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta content='nanoc 4.9.9' name='generator'>
+<title>
+
+[On a Whim]
+</title>
+</head>
+<body>
+<div id='title'>
+<a title="Main page" href="/">On a Whim</a>
+<div id='nav'>
+<ul>
+<li>
+<a title="About the author, the website, etc." href="/about/">About</a>
+</li>
+<li>
+<span class="active">Technical Content</span>
+</li>
+<li>
+<a title="Startup Content" href="/startup_blog/">Startup Content</a>
+</li>
+</ul>
+</div>
+</div>
+<hr>
+<div id='main'>
+<div id='blog-listing'>
+<div class='post'>
+<h2>
+<a href="/blog/2018/10/07/lqr/">LQR</a>
+</h2>
+<aside class='abstract'>
+LQR is useful.
+</aside>
+<aside class='posted_at'>
+Posted at 2018-10-07 20:18
+</aside>
+</div>
+</div>
+
+</div>
+</body>
+</html>
+;
+T;U;[I"5/Users/andy/Projects/on_a_whim/content/blog.haml;
+TI"#blog-listing
+  - sorted_articles.each do |post|
+    .post
+      %h2
+        = link_to post[:title], post.path
+      - if post.attributes.has_key?(:abstract)
+        %aside.abstract
+          = post[:abstract]
+      %aside.posted_at
+        = 'Posted at ' + post[:created_at]
+;
+T;U;[0I"�<div id='blog-listing'>
+<div class='post'>
+<h2>
+<a href="/blog/2018/10/07/lqr/">LQR</a>
+</h2>
+<aside class='abstract'>
+LQR is useful.
+</aside>
+<aside class='posted_at'>
+Posted at 2018-10-07 20:18
+</aside>
+</div>
+</div>
+;
+T;@o;;;;	I"/CNAME/;
+T{;{;U;[I"6/Users/andy/Projects/on_a_whim/content/CNAME.html;
+TI"chogg.name
+;
+T;@';@'o;;;;	I"/;
+T{;{	;U;[0I"9<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta content='nanoc 4.9.9' name='generator'>
+<title>
+Home
+[On a Whim]
+</title>
+</head>
+<body>
+<div id='title'>
+<span class="active">On a Whim</span>
+<div id='nav'>
+<ul>
+<li>
+<a title="About the author, the website, etc." href="/about/">About</a>
+</li>
+<li>
+<a title="Technical Content" href="/blog/">Technical Content</a>
+</li>
+<li>
+<a title="Startup Content" href="/startup_blog/">Startup Content</a>
+</li>
+</ul>
+</div>
+</div>
+<hr>
+<div id='main'>
+<h1 id="about-the-author">About the Author</h1>
+<p><img src="/assets/andy1.png" title="Andy&#39;s profile" height="600" /></p>
+<p>Hello. My name is Andy. I wear a few hats. I am currently a motion planning engineer at <a href="https://www.uber.com/info/atg/">Uber ATG</a> (Advanced Technologies Group), Uber’s R&amp;D division for self-driving cars. I am a former startup founder of Ikigai, a computational drug-discovery startup focused on Alzheimer’s (accepted to YCombinator Summer 2018). I also formerly collaborated with the <a href="http://www.pfenninglab.org/">Neurogenomics Laboratory</a>, a computational biology lab using machine learning to identify epigenetic drug targets for Alzheimer’s.</p>
+<h1 id="on-a-whim">On a Whim</h1>
+<p>I care about technology that impacts the world in a profoundly positive way and the process by which the world adopts that technology. This blog is named “On a Whim” because I believe transformative technology is started by scientists, entrepreneurs, dreamers who pursue an idea on a whim. To that end, “On a Whim” is my vehicle for communicating thoughts on two of my passions: math and entrepreneurship.</p>
+
+</div>
+</body>
+</html>
+;
+T;U;[I"8/Users/andy/Projects/on_a_whim/content/index.pandoc;
+TI"# About the Author
+![](/assets/andy1.png "Andy's profile"){width=500, height=600}
+
+Hello. My name is Andy. I wear a few hats. 
+I am currently a motion planning engineer at [Uber ATG](https://www.uber.com/info/atg/) (Advanced Technologies Group), Uber's R&D division for self-driving cars.
+I am a former startup founder of Ikigai, a computational drug-discovery startup focused on Alzheimer's (accepted to YCombinator Summer 2018). I also formerly collaborated with 
+the [Neurogenomics Laboratory](http://www.pfenninglab.org/), a computational biology lab using machine learning to identify epigenetic drug targets for Alzheimer's. 
+
+# On a Whim 
+I care about technology that impacts the world in a profoundly positive way and the process by which the world adopts that technology. This blog is named "On a Whim" because 
+I believe transformative technology is started by scientists, entrepreneurs, dreamers who pursue an idea on a whim. To that end, "On a Whim" is my vehicle for communicating thoughts on two of my passions: math and entrepreneurship.
+
+;
+T;U;[0I"�<h1 id="about-the-author">About the Author</h1>
+<p><img src="/assets/andy1.png" title="Andy&#39;s profile" height="600" /></p>
+<p>Hello. My name is Andy. I wear a few hats. I am currently a motion planning engineer at <a href="https://www.uber.com/info/atg/">Uber ATG</a> (Advanced Technologies Group), Uber’s R&amp;D division for self-driving cars. I am a former startup founder of Ikigai, a computational drug-discovery startup focused on Alzheimer’s (accepted to YCombinator Summer 2018). I also formerly collaborated with the <a href="http://www.pfenninglab.org/">Neurogenomics Laboratory</a>, a computational biology lab using machine learning to identify epigenetic drug targets for Alzheimer’s.</p>
+<h1 id="on-a-whim">On a Whim</h1>
+<p>I care about technology that impacts the world in a profoundly positive way and the process by which the world adopts that technology. This blog is named “On a Whim” because I believe transformative technology is started by scientists, entrepreneurs, dreamers who pursue an idea on a whim. To that end, “On a Whim” is my vehicle for communicating thoughts on two of my passions: math and entrepreneurship.</p>
+;
+T;@/o;;;;	I"/stylesheet/;
+T{;{;U;[I":/Users/andy/Projects/on_a_whim/content/stylesheet.css;
+TI"
+body {
+  background: #fff;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+#title {
+  font-size: 200%;
+  text-align: center;
+}
+
+#title, #nav {
+  font-family: 'Oranienbaum', serif;
+}
+
+#nav {
+  font-size: 75%;
+}
+
+#nav * {
+  margin: 0;
+  padding: 0;
+}
+
+#nav ul {
+  text-align: center;
+}
+
+#nav ul li {
+  list-style-type: none;
+  display: inline;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#title a {
+  color: black;
+}
+
+#nav a {
+  text-decoration: underline;
+}
+
+#nav a:hover {
+  text-decoration: none;
+}
+
+#main {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40em;
+}
+
+#main #blog-listing, #post aside {
+  text-align: center;
+}
+
+#main #blog-listing h2, #post h1 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+#main #blog-listing aside, #post aside {
+  margin-top: 0;
+}
+
+aside.tldr {
+  font-size: 120%;
+  font-style: italic;
+}
+
+#main #post aside.tldr, aside.posted_at {
+  color: #555;
+}
+
+#main #post aside.tldr {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5em;
+  margin-bottom: 1.5em;
+}
+
+#main table {
+  width: 100%;
+}
+#main table th {
+  background: #eee;
+}
+
+#source {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.footnotes {
+  margin-top: 100%;
+}
+
+pre, code, code span, kbd, var {
+  font-family: Consolas, Inconsolata, Monaco, monospace;
+}
+code {
+  border-radius: 0.25em;
+  background: #ddd;
+  padding: 0.25em;
+}
+
+/* Highlight pygments with the 'desert' theme:
+ * http://igniteflow.com/pygments/themes/ */
+pre code {
+  display: block;
+  width: 100%;
+  background: #333333;
+  color: #ffffff;
+  padding: 0.5em;
+
+  /* Include the padding in the width. */
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+code .hll { background-color: #ffffcc }
+code .c, code .co { color: #87ceeb} /* Comment */
+code .err { color: #ffffff} /* Error */
+code .g { color: #ffffff} /* Generic */
+code .k, code .kw { color: #f0e68c} /* Keyword */
+code .l { color: #ffa0a0} /* Literal */
+code .n { color: #ffffff} /* Name */
+code .o { color: #ffffff} /* Operator */
+code .x { color: #ffffff} /* Other */
+code .p { color: #ffffff} /* Punctuation */
+code .cm { color: #87ceeb} /* Comment.Multiline */
+code .cp { color: #cd5c5c} /* Comment.Preproc */
+code .c1 { color: #87ceeb} /* Comment.Single */
+code .cs { color: #87ceeb} /* Comment.Special */
+code .gd { color: #0000c0; font-weight: bold; background-color: #008080 } /* Generic.Deleted */
+code .ge { color: #c000c0; text-decoration: underline} /* Generic.Emph */
+code .gr { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Error */
+code .gh { color: #cd5c5c} /* Generic.Heading */
+code .gi { color: #ffffff; background-color: #0000c0 } /* Generic.Inserted */
+code .go { color: #add8e6; font-weight: bold; background-color: #4d4d4d } /* Generic.Output */
+code .gp { color: #ffffff} /* Generic.Prompt */
+code .gs { color: #ffffff} /* Generic.Strong */
+code .gu { color: #cd5c5c} /* Generic.Subheading */
+code .gt { color: #c0c0c0; font-weight: bold; background-color: #c00000 } /* Generic.Traceback */
+code .kc { color: #f0e68c} /* Keyword.Constant */
+code .kd { color: #f0e68c} /* Keyword.Declaration */
+code .kn { color: #f0e68c} /* Keyword.Namespace */
+code .kp { color: #f0e68c} /* Keyword.Pseudo */
+code .kr { color: #f0e68c} /* Keyword.Reserved */
+code .kt { color: #bdb76b} /* Keyword.Type */
+code .ld { color: #ffffff} /* Literal.Date */
+code .m { color: #ffa0a0} /* Literal.Number */
+code .s { color: #ffa0a0} /* Literal.String */
+code .na { color: #ffffff} /* Name.Attribute */
+code .nb { color: #ffffff} /* Name.Builtin */
+code .nc { color: #ffffff} /* Name.Class */
+code .no { color: #ffa0a0} /* Name.Constant */
+code .nd { color: #ffffff} /* Name.Decorator */
+code .ni { color: #ffdead} /* Name.Entity */
+code .ne { color: #ffffff} /* Name.Exception */
+code .nf { color: #ffffff} /* Name.Function */
+code .nl { color: #ffffff} /* Name.Label */
+code .nn { color: #ffffff} /* Name.Namespace */
+code .nx { color: #ffffff} /* Name.Other */
+code .py { color: #ffffff} /* Name.Property */
+code .nt { color: #f0e68c} /* Name.Tag */
+code .nv { color: #98fb98} /* Name.Variable */
+code .ow { color: #ffffff} /* Operator.Word */
+code .w { color: #ffffff} /* Text.Whitespace */
+code .mf, code .fl { color: #ffa0a0} /* Literal.Number.Float */
+code .mh { color: #ffa0a0} /* Literal.Number.Hex */
+code .mi, code .dv { color: #ffa0a0} /* Literal.Number.Integer */
+code .mo { color: #ffa0a0} /* Literal.Number.Oct */
+code .sb { color: #ffa0a0} /* Literal.String.Backtick */
+code .sc { color: #ffa0a0} /* Literal.String.Char */
+code .sd { color: #ffa0a0} /* Literal.String.Doc */
+code .s2 { color: #ffa0a0} /* Literal.String.Double */
+code .se { color: #ffa0a0} /* Literal.String.Escape */
+code .sh { color: #ffa0a0} /* Literal.String.Heredoc */
+code .si { color: #ffa0a0} /* Literal.String.Interpol */
+code .sx { color: #ffa0a0} /* Literal.String.Other */
+code .sr { color: #ffa0a0} /* Literal.String.Regex */
+code .s1 { color: #ffa0a0} /* Literal.String.Single */
+code .ss { color: #ffa0a0} /* Literal.String.Symbol */
+code .bp { color: #ffa0a0} /* Name.Builtin.Pseudo */
+code .vc { color: #98fb98} /* Name.Variable.Class */
+code .vg { color: #98fb98} /* Name.Variable.Global */
+code .vi { color: #98fb98} /* Name.Variable.Instance */
+code .il { color: #ffffff} /* Literal.Number.Integer.Long */
+
+;
+T;@=;@=o;;;;	I"/crash/;
+T{;{;o:Nanoc::Int::BinaryContent:@filenameI"5/Users/andy/Projects/on_a_whim/content/crash.log;
+T;@E;@Eo;;;;	I"/blog/lqr/;
+T{;{	;U;[0I"�<!DOCTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Oranienbaum' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta content='nanoc 4.9.9' name='generator'>
+<title>
+LQR
+[On a Whim]
+</title>
+</head>
+<body>
+<div id='title'>
+<a title="Main page" href="/">On a Whim</a>
+<div id='nav'>
+<ul>
+<li>
+<a title="About the author, the website, etc." href="/about/">About</a>
+</li>
+<li>
+<a title="Technical Content" href="/blog/">Technical Content</a>
+</li>
+<li>
+<a title="Startup Content" href="/startup_blog/">Startup Content</a>
+</li>
+</ul>
+</div>
+</div>
+<hr>
+<div id='main'>
+<div id='post'>
+<h1>
+LQR
+</h1>
+<aside class='posted_at'>
+Posted at 2018-10-07 20:18
+</aside>
+<aside class='abstract'>
+<b>Abstract:</b>
+LQR is useful.
+</aside>
+<article>
+<p>Compile-time computation has obvious appeal: any work you do when you <em>build</em> the program is already done when you <em>run</em> it – hence, faster programs.</p>
+<h3 id="lqr">LQR</h3>
+<p>LQR stands for linear quadratic regulator.</p>
+<p>Consider the gradient <span class="math inline">\(\nabla_{u}G\)</span>. <span class="math display">\[\nabla_{u}G = \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}(V_{t}(Ax + Bu)) \]</span> The recursive solution to <span class="math inline">\(V_{t}(\cdot)\)</span> takes the quadratic form, <span class="math inline">\(x_{t}P_{t}x_{t}\)</span>, where <span class="math inline">\(P_{t}\)</span> is semipositive-definite. Substituting this solution in, we obtain</p>
+<p><span class="math display">\[\begin{align*}
+\nabla_{u}G &amp;= \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}\bigg((Ax+Bu)^{T}P_{t}(Ax+Bu)\bigg) \\
+&amp;= 0 + 2u^{T}R + \frac{\partial}{\partial u}\bigg(u^{T}B^{T}P_{t}Bu + x^{T}AP_{t}Ax + 2(u^{T}B^{T}P_{t}Ax)\bigg) \text{ (by claim 1.1) }\\
+&amp;= 2u^{T}R + \frac{\partial}{\partial u}(u^{T}B^{T}P_{t}Bu) + \frac{\partial}{\partial u}(x^{T}AP_{t}Ax) + \frac{\partial}{\partial u}2(u^{T}B^{T}P_{t}Ax) \\
+&amp;= 2u^{T}R + 2u^{T}B^{T}P_{t}B + 2B^{T}P_{t}Ax
+\end{align*}\]</span></p>
+<p>Now if we set the gradient to <span class="math inline">\(0\)</span>, we can solve for <span class="math inline">\(u^{*}\)</span>. Note that <span class="math inline">\(u^{*}\)</span> is the optimal solution for <span class="math inline">\(u_{t}\)</span>. After working the solution out, we arrive at the following set of equations. <span class="math display">\[\begin{align}
+u^{*} &amp;= K_{t}x \\
+K_{t} &amp;= -(R + B^{T}P_{t}B)^{-1}(B^{T}P_{t}Ax)
+\end{align}\]</span></p>
+<p><span class="math display">\[\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.\]</span></p>
+<p>The base cases for <span class="math inline">\(n\)</span>-choose-<span class="math inline">\(k\)</span> occur when we choose all of the items, or none of them. In either case, the answer is 1: there is exactly one way to do that.</p>
+
+</article>
+</div>
+
+</div>
+</body>
+</html>
+;
+T;U;[I";/Users/andy/Projects/on_a_whim/content/blog/lqr.pandoc;
+TI"3Compile-time computation has obvious appeal: any work you do when you _build_ the program is already done when you _run_ it -- hence, faster programs.
+
+### LQR
+LQR stands for linear quadratic regulator.
+
+Consider the gradient $\nabla_{u}G$. 
+$$\nabla_{u}G = \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}(V_{t}(Ax + Bu)) $$
+The recursive solution to $V_{t}(\cdot)$ takes the quadratic form,  $x_{t}P_{t}x_{t}$, where $P_{t}$ is semipositive-definite. Substituting this solution in, we obtain
+
+\begin{align*}
+\nabla_{u}G &= \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}\bigg((Ax+Bu)^{T}P_{t}(Ax+Bu)\bigg) \\
+&= 0 + 2u^{T}R + \frac{\partial}{\partial u}\bigg(u^{T}B^{T}P_{t}Bu + x^{T}AP_{t}Ax + 2(u^{T}B^{T}P_{t}Ax)\bigg) \text{ (by claim 1.1) }\\
+&= 2u^{T}R + \frac{\partial}{\partial u}(u^{T}B^{T}P_{t}Bu) + \frac{\partial}{\partial u}(x^{T}AP_{t}Ax) + \frac{\partial}{\partial u}2(u^{T}B^{T}P_{t}Ax) \\
+&= 2u^{T}R + 2u^{T}B^{T}P_{t}B + 2B^{T}P_{t}Ax
+\end{align*}
+
+Now if we set the gradient to $0$, we can solve for $u^{*}$. Note that $u^{*}$ is the optimal solution for $u_{t}$. After working the solution out, we arrive at the following set of equations.
+\begin{align}
+u^{*} &= K_{t}x \\
+K_{t} &= -(R + B^{T}P_{t}B)^{-1}(B^{T}P_{t}Ax)
+\end{align}
+
+$$\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.$$
+
+The base cases for $n$-choose-$k$ occur when we choose all of the items, or none of them.  In either case, the answer is 1: there is exactly one way to do that.
+
+;
+T;U;[0I"}<p>Compile-time computation has obvious appeal: any work you do when you <em>build</em> the program is already done when you <em>run</em> it – hence, faster programs.</p>
+<h3 id="lqr">LQR</h3>
+<p>LQR stands for linear quadratic regulator.</p>
+<p>Consider the gradient <span class="math inline">\(\nabla_{u}G\)</span>. <span class="math display">\[\nabla_{u}G = \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}(V_{t}(Ax + Bu)) \]</span> The recursive solution to <span class="math inline">\(V_{t}(\cdot)\)</span> takes the quadratic form, <span class="math inline">\(x_{t}P_{t}x_{t}\)</span>, where <span class="math inline">\(P_{t}\)</span> is semipositive-definite. Substituting this solution in, we obtain</p>
+<p><span class="math display">\[\begin{align*}
+\nabla_{u}G &amp;= \frac{\partial}{\partial u}(x^{T}Qx) + \frac{\partial}{\partial u}(u^{T}Ru) + \frac{\partial}{\partial u}\bigg((Ax+Bu)^{T}P_{t}(Ax+Bu)\bigg) \\
+&amp;= 0 + 2u^{T}R + \frac{\partial}{\partial u}\bigg(u^{T}B^{T}P_{t}Bu + x^{T}AP_{t}Ax + 2(u^{T}B^{T}P_{t}Ax)\bigg) \text{ (by claim 1.1) }\\
+&amp;= 2u^{T}R + \frac{\partial}{\partial u}(u^{T}B^{T}P_{t}Bu) + \frac{\partial}{\partial u}(x^{T}AP_{t}Ax) + \frac{\partial}{\partial u}2(u^{T}B^{T}P_{t}Ax) \\
+&amp;= 2u^{T}R + 2u^{T}B^{T}P_{t}B + 2B^{T}P_{t}Ax
+\end{align*}\]</span></p>
+<p>Now if we set the gradient to <span class="math inline">\(0\)</span>, we can solve for <span class="math inline">\(u^{*}\)</span>. Note that <span class="math inline">\(u^{*}\)</span> is the optimal solution for <span class="math inline">\(u_{t}\)</span>. After working the solution out, we arrive at the following set of equations. <span class="math display">\[\begin{align}
+u^{*} &amp;= K_{t}x \\
+K_{t} &amp;= -(R + B^{T}P_{t}B)^{-1}(B^{T}P_{t}Ax)
+\end{align}\]</span></p>
+<p><span class="math display">\[\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.\]</span></p>
+<p>The base cases for <span class="math inline">\(n\)</span>-choose-<span class="math inline">\(k\)</span> occur when we choose all of the items, or none of them. In either case, the answer is 1: there is exactly one way to do that.</p>
+;
+T;@K:versioni

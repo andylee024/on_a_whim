@@ -1,0 +1,5 @@
+title: Differential Dynamic Programming
+kind: article
+created_at: 2018-10-10 14:00
+abstract: A general purpose algorithm for solving finite-horizon discrete-time control problems using dynamic programming.
+short_url: ddp

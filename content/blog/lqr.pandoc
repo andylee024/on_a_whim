@@ -1,5 +1,7 @@
 One of the most powerful ideas from optimal control is the Linear-Quadratic Regulator (LQR), which is a classic algorithm used to optimally solve a simple class of control problems characterized by linear dynamics and quadratic costs.
 
+![A visual for trajectory optimization. Image courtesy of [^1]](/assets/lqr_image1.png "lqr image"){width=120px, height=120px}
+
 # Trajectory Optimization
 Consider a discrete-time dynamics model for state, control pair $(x,u)$.
 \begin{equation}
@@ -11,7 +13,7 @@ J(x_{0}, U) = \sum_{t=0}^{n-1}c_{t}(x_{t}, u_{t}) + c_{n}(x_{n})
 \end{equation}
 The solution to the optimal control problem is a control sequence that minimizes total cost.
 \begin{equation}
-U^{*} \equiv \text{argmin}_{U} J(x,U)
+U^{*} \equiv \text{arg} \min\limits_{U} J(x,U)
 \end{equation}
 
 # LQR Problem
@@ -110,3 +112,5 @@ $$
 \end{align*}
 $$
 I will add a remark that this claim is useful in the LQR setting by showing this claim also holds in the base case for $t=n$. This is true by simply noting the terminal cost is $c_{n} = x^{T}Q_{n}x$.
+
+[^1]: http://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-10.pdf 

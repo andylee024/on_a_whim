@@ -44,9 +44,13 @@ compile '/blog/*' do
 end
 
 compile '*' do
+  if item.binary?
+      # don't filter binary items
+  else
   filter :pandoc, args: ['mathjax']
   layout 'post'
   layout 'default'
+  end
 end
 
 # ########################################################################################## 
@@ -67,9 +71,17 @@ route '/blog/*' do
   [OutputDirectory(item), 'index.html'].join('/')
 end
 
+route '/assets/*/' do
+  item.identifier.chop + '.' + item[:extension]
+end
+
 route '*' do
-  # Write item with identifier /foo/ to /foo/index.html
-  item.identifier + 'index.html'
+  if item.binary?
+    # Write item with identifier /foo/ to /foo/index.html
+    item.identifier.chop + '.' + item[:extension]
+  else
+    item.identifier + 'index.html'
+  end
 end
 
 # ########################################################################################## 

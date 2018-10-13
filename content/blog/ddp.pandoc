@@ -1,4 +1,6 @@
-Differential Dynamic Programming refers to a general class of dynamic programming algorithms that iteratively solve finite-horizon discrete-time control problems by using locally quadratic models of cost and dynamics. This blog post provides a comprehensive introduction to DDP.
+Differential Dynamic Programming refers to a general class of dynamic programming algorithms that iteratively solve finite-horizon discrete-time control problems by using locally quadratic models of cost and dynamics. This blog post provides a comprehensive introduction to DDP. This blog post closely follows (Tassa et.al 14).[^1]
+
+![](/assets/ddp_image1.png "ddp image"){width=250px, height=300px}
 
 # Trajectory Optimization
 Consider a discrete-time dynamics model for state, control pair $(x,u)$.
@@ -190,3 +192,5 @@ I'm always struck by the elegance of formulating optimal control problems as a d
 
 ### Insight 2: Power of a Taylor Series Approximation
 DDP is also my favorite application of the taylor series approximations. I think it's incredible that this simple concept we learn in high school calculus is so powerful that its commonly used to solve real-world robotics problems. In this case, we saw that the artful use of 2nd-order approximations to costs and dynamics allowed us to leverage the efficiency of LQR on a much more general class of problems.
+
+[^1]: Control-Limited Differential Dynamic Programming[(paper)](https://homes.cs.washington.edu/~todorov/papers/TassaICRA14.pdf)

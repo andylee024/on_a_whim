@@ -1,8 +1,0 @@
-#project
-  %h1
-    = item[:title]
-  - if item.attributes.has_key?(:tldr)
-    %aside.tldr
-      = item[:tldr]
-  %article
-    = yield

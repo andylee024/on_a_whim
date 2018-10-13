@@ -1,5 +1,5 @@
-# All files in the 'lib' directory will be loaded
-# before nanoc starts compiling.
+# All files in the 'lib' directory will be loaded before nanoc starts compiling.
+# Think of these as utility functions that we can access when writing compilation, routing and layout logic.
 
 include Nanoc::Helpers::Blogging
 include Nanoc::Helpers::LinkTo
@@ -13,7 +13,6 @@ def ShortBlogName(item)
 end
 
 # Custom logic for the output directory.
-#
 # We put it here so that other helpers can reference this logic too.
 def OutputDirectory(item)
   if item.nil?
@@ -28,35 +27,6 @@ def OutputDirectory(item)
     return item.identifier
   end
 end
-
-class KnitrFilter < Nanoc::Filter
-  identifier :knitr
-
-  def run(content, params={})
-    require 'tempfile'
-    output_dir = 'output' + OutputDirectory(@item)
-    file = Tempfile.new('knitr_output')
-    begin
-      file.write(content)
-      file.close
-      command = ('Rscript -e \'library(knitr);' +
-                 'dir.create(file.path(normalizePath("."), "' + output_dir +
-                 '"), recursive=TRUE);' +
-                 'dir <- normalizePath("' + output_dir + '");' +
-                 'opts_knit$set(base.dir=dir, root.dir=normalizePath("."));' +
-                 'opts_chunk$set(fig.path="", fig.cap="", fig.width=9);' +
-                 'cat(knit(quiet=TRUE, output=NULL, input="' + file.path +
-                 '"))\'')
-      output_filename = `#{command}`
-      result = IO.read(output_filename)
-      File.delete(output_filename)
-      return result
-    ensure
-      file.unlink
-    end
-  end
-end
-
 
 # Links to extra assets (javascript and CSS) requested in the yaml header.
 def extra_asset_links

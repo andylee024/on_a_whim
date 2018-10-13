@@ -13,6 +13,18 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+
+# ########################################################################################## 
+#
+# Compilation Rules
+# * These rules describe actions that should be executed during compilation 
+# * (filter, layout, snapshot)
+#
+# Notes:
+#   - The directory that gets compiled is the /content directory so paths are relative to /content
+#
+# ########################################################################################## 
+
 compile '/stylesheet/' do
 end
 
@@ -24,37 +36,25 @@ compile '/blog/' do
   layout 'default'
 end
 
-
-compile '/blog/*/data/*' do
-  # Do not compile datafiles.
-end
-
 compile '/blog/*' do
-  if item[:extension] == 'Rmd'
-    filter :knitr
-  end
-  if item[:extension] != 'R'
-    filter :pandoc, args: ['mathjax']
-    filter :colorize_syntax
-    layout 'post'
-    layout 'default'
-  end
+  filter :pandoc, args: ['mathjax']
+  filter :colorize_syntax, :default_colorizer => :pygmentsrb
+  layout 'post'
+  layout 'default'
 end
 
 compile '*' do
-  if item.binary?
-    # don’t filter binary items
-  elsif item.identifier == '/CNAME/'
-    # Don't do anything; leave it as is.
-  else
-    if item[:extension] == 'Rmd'
-      filter :knitr
-    end
-    filter :pandoc, args: ['mathjax']
-    layout 'default'
-  end
+  filter :pandoc, args: ['mathjax']
+  layout 'post'
+  layout 'default'
 end
 
+# ########################################################################################## 
+#
+# Route Rules
+# * These rules describe path where compiled items should be written to. 
+#
+# ########################################################################################## 
 route '/stylesheet/' do
   '/style.css'
 end
@@ -63,41 +63,20 @@ route '/blog/' do
   '/blog/index.html'
 end
 
-route '/projects/' do
-  '/projects/index.html'
-end
-
-route '/blog/*/data/*' do
-  # Do not output datafiles.
-end
-
 route '/blog/*' do
   [OutputDirectory(item), 'index.html'].join('/')
 end
 
-route '/assets/third_party/*/' do
-  extension_list = item[:extension].split('.')
-  extension = extension_list[extension_list.length - 1]
-  trimmed_path = (item.identifier.to_str.split('/') - ['third_party'])
-  i = trimmed_path.length - 1
-  trimmed_path[i] = trimmed_path[i].sub(%r{-[.\d]*(\.min)?$}, '')
-  trimmed_path.join('/') + '.' + extension
-end
-
-route '/assets/*/' do
-  item.identifier.chop + '.' + item[:extension]
-end
-
 route '*' do
-  if item.binary?
-    # Write item with identifier /foo/ to /foo.ext
-    item.identifier.chop + '.' + item[:extension]
-  elsif item.identifier == '/CNAME/'
-    item.identifier.chop
-  else
-    # Write item with identifier /foo/ to /foo/index.html
-    item.identifier + 'index.html'
-  end
+  # Write item with identifier /foo/ to /foo/index.html
+  item.identifier + 'index.html'
 end
 
+# ########################################################################################## 
+#
+# Layout Rules
+# * These rules describe the filter that should be used for a given layout.
+#
+# ########################################################################################## 
 layout '*', :haml
+

@@ -1,0 +1,5 @@
+title: Variational Inference 
+kind: article
+created_at: 2017-10-07 20:18
+abstract: Variational inference is an optimization technique used to approximate intractable posterior densities arising in bayesian statistics.
+short_url: variational_inference

@@ -1,25 +1,22 @@
----
-layout: post
-title:  "A Definition for Alzheimer's Disease"
-date:   2017-10-23 
-categories: Biology
----
-
 A few months ago, I realized I wanted to contribute towards finding a cure for Alzheimer’s disease (AD). 
 To start, I fell back on one of my guiding principles as a scientist -- that to find solutions to complex problems,
-one has to first understand the problem at a basic, fundamental level. 
+one has to first understand the problem at a basic, fundamental level. In this blog post, I want to start from 
+the basics and answer one seemingly simple question. 
 
-So in this blog post, I want to start from the basics and answer one seemingly simple question. 
-
-> What is Alzheimer's disease?
+```
+What is Alzheimer's disease?
+```
 
 ## Searching for a definition for Alzheimer’s Disease
 
 The majority of us know Alzheimer’s to be a neurodegenerative disease that causes gradual memory loss, speech problems 
 and a loss of motor skills. A physician might provide a more sophisticated answer to my question.
 
-> Alzheimer’s is a neurodegenerative disease marked by a host of disease phenotypes such as neuron death 
-> and the abnormal accumulation of amyloid-beta plaques and neurofibrillary tangles.
+```
+Alzheimer’s is a neurodegenerative disease marked by a host of 
+disease phenotypes such as neuron death and the abnormal 
+accumulation of amyloid-beta plaques and neurofibrillary tangles.
+```
 
 It turns out that this is the definition given by the National Institute of Aging for diagnoising AD and the definition
 that is generally accepted by the scientific community [^1]. Unfortunately, this is a definition with which I am 
@@ -41,8 +38,7 @@ disease brains, but not present in healthy brains! It turned out that disease br
 neuron death than healthy brains. We eventually realized that disease brains to contain an overabundance of a certain 
 peptide called amyloid-beta as well as neurofibrillary tangles (aggregates of hyperphosphorylated tau protein). 
 
-![Healthy Brain vs. Alzheimer's Brain]({{ "/assets/biology/alzheimers_brain_comparison.jpg" | absolute_url }})
-
+![Healthy Brain vs. Alzheimer's Brain](/assets/biology/alzheimers_brain_comparison.jpg)
 *Image courtersy of http://neurosciencenews.com/* 
 
 While the exact function of these two biological structures (amyloid-beta ad neurofibrillary tangles) is not know, 
@@ -59,8 +55,11 @@ to find abnormally large deposits of amyloid-beta and neurofibrillary tangles.
  
 Recall, the currently accepted definition of Alzheimer’s is given as follows 
 
-> Alzheimer’s is a neurodegenerative disease marked by a host of disease phenotypes such as neuron death and 
-> the abnormal accumulation of amyloid-beta plaques and neurofibrillary tangles.
+```
+Alzheimer’s is a neurodegenerative disease marked by a host of 
+disease phenotypes such as neuron death and the abnormal 
+accumulation of amyloid-beta plaques and neurofibrillary tangles.
+```
 
 Frankly, I find the above definition discomforting because it is imprecise. 
 To illustrate, consider the following ambiguities that our working definition does not resolve. 
@@ -71,9 +70,12 @@ To illustrate, consider the following ambiguities that our working definition do
 
 I would been far more satisfied to hear a definition more along of the lines of the following.
 
-> A person is diagnosed with Alzheimer’s disease when the measure of amyloid-beta peptides 
-> exceeds X threshold, sparking neuron death and disruption of cellular signaling pathways 
-> linked to cognitive decline and memory loss.
+```
+A person is diagnosed with Alzheimer’s disease when the measure 
+amyloid-beta peptides exceeds X threshold, sparking neuron death 
+and disruption of cellular signaling pathways linked to 
+cognitive decline and memory loss.
+```
 
 Notice the difference. The new definition resolves the underlying ambiguities by assigning a well-defined criterion 
 (amyloid-beta exceeds X threshold) for diagnosing Alzheimer’s. In effect, diagnosing Alzheimer’s no longer 
@@ -111,7 +113,4 @@ make some massive scientific breakthroughs, we will not arrive at that precise d
 [^1]: National Institute on Aging–Alzheimer’s Association guidelines for the neuropathologic assessment of Alzheimer’s disease [(link)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3266529)
 
 [^2]: Road to Restoring Neural Circuits for Treatment of Alzheimer’s Disease [(link)](https://www.ncbi.nlm.nih.gov/pubmed/27830780)
-
-
-
 

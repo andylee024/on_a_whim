@@ -1,0 +1,5 @@
+title: Descent Methods for Optimization
+kind: article
+created_at: 2017-10-07 00:00
+abstract: Interpreting gradient descent and Newton's method as minimizing a quadratic approximation to a loss function.
+short_url: descent_methods 

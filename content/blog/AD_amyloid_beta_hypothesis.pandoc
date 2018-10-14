@@ -1,9 +1,3 @@
----
-layout: post
-title:  "AD Directions - Amyloid Beta Hypothesis"
-date:   2017-10-24
-categories: Biology
----
 This technical blog post covers the amyloid-beta hypothesis in Alzheimer's disease (AD). 
 
 Recall that Alzheimer’s disease is characterized by a number of disease phenotypes including loss of memory, 
@@ -13,20 +7,21 @@ abnormal accumulation of amyloid-beta peptides. In short, the leading hypothesis
 that too much of the amyloid-beta plaque is found in brains and this causes problems with the brain. 
 
 This is easily the most popular explanation for Alzheimer's and the amyloid-beta peptide has received perhaps the most
-the attention among the scientific community for AD. 
-
-In this technical blog post, I'll be presenting an overview of the amyloid-beta hypothesis. My aim is to provide a 
+the attention among the scientific community for AD. In this technical blog post, I'll be presenting an overview of the amyloid-beta hypothesis. My aim is to provide a 
 thorough review of the biology behind this hypothesis to non-experts. 
 
-![Amyloid Beta in Alzheimer's Brain](/assets/biology/amyloid_beta_healthy_vs_alzheimers.jpg "AD image")
-*Image courtersy of https://columbiasciencereview.com/2017/04/07/the-role-of-our-immune-system-in-alzheimers/*
+![](/assets/biology/amyloid_beta_healthy_vs_alzheimers.jpg "AD image"){width=500px, height=500px}
+*Amyloid Beta in Alzheimer's Brain. Image courtesy of [^3]*
 
 I'll be organizing my presentation as follows. 
-- Section 1 discusses the origins of the amyloid-beta hypothesis and explain why this particular hypothesis is popular. 
-- Section 2 discusses the biology behind the amyloid-beta peptide (how it is created and its role in mammalian bodies). 
-- Section 3 discusses the links between the amyloid-beta peptide and Alzheimer’s Disease. 
-- Section 4 discusses recent challenges to the amyloid-beta hypothesis and argues that the 
-amyloid-beta hypothesis is an insufficient model for Alzheimer’s Disease. 
+
+  * **Section 1** discusses the origins of the amyloid-beta hypothesis and explain why this particular hypothesis is popular. 
+
+  * **Section 2** discusses the biology behind the amyloid-beta peptide (how it is created and its role in mammalian bodies). 
+
+  * **Section 3** discusses the links between the amyloid-beta peptide and Alzheimer’s Disease. 
+
+  * **Section 4** discusses recent challenges to the amyloid-beta hypothesis and argues that the amyloid-beta hypothesis is an insufficient model for Alzheimer’s Disease. 
 
 ## Motivation
 To begin our discussion, I would like to highlight a few trends surrounding Alzheimer’s Disease. 
@@ -39,14 +34,17 @@ These two observations reflect the popularity amyloid-beta in Alzheimer’s dise
 establishing amyloid-beta as one of the primary research directions for understanding the disease. 
 Naturally, we want to ask the question. 
 
-> What is amyloid-beta and why is it so important in Alzheimer’s Disease?
+```
+What is amyloid-beta and why is it so important in Alzheimer’s Disease?
+```
 
 The answer turns out the deceptively simple. Over the last few decades we have dissected many brains 
 of people who exhibited Alzheimer’s disease symptoms such as the gradual loss of memory, 
 deteriorating speech abilities, etc. Subsequently, when comparing healthy brains and disease brains, 
 the scientific community has observed that disease brains tend to have severe neuron loss as well as an 
-overabundance of amyloid beta peptides in contrast to their healthy counterparts. In a previous 
-[technical blog-post](https://andylee024.github.io/biology/2017/10/23/AD_definition.html), 
+overabundance of amyloid beta peptides in contrast to their healthy counterparts. 
+
+In a previous [technical blog-post](https://andylee024.github.io/biology/2017/10/23/AD_definition.html), 
 I discussed both the importance and difficulty in identifying accurate biomarkers that signal the onset of 
 Alzheimer’s. In the context of biomarkers, amyloid-beta is perhaps the single most consistent biomarker that 
 has been observed in post-mortem disease brains. For this reason, amyloid-beta and its overabundance provides a first 
@@ -60,7 +58,8 @@ to answer the following questions.
  - What major mechanisms are involved in the creation of the amyloid-beta peptide?
  - What function does the amyloid-beta peptide serve in our bodies?
 
-![Amyloid Beta Progression]({{ "/assets/biology/amyloid_beta_progression.jpg" | absolute_url }})
+![](/assets/biology/amyloid_beta_progression.jpg){width=500px, height=500px}
+*Amyloid Beta Progression. Image courtesy of [^2]*
 
 ### Basic building blocks: DNA, amino-acids, proteins
 To begin, let’s review some basic biology. Recall that an amino-acid is defined to be sequence of nucleotide bases, 
@@ -74,7 +73,8 @@ amino-acids and proteins are chains of both peptides as well as amino-acids).
 
 ### Roots of Amyloid-Beta Peptide
 
-![Amyloid Beta Pathway]({{ "/assets/biology/amyloid_beta_pathway.jpg" | absolute_url }})
+![](/assets/biology/amyloid_beta_pathway.jpg)
+*Amyloid Beta Pathway. Image courtesy of [^2]*
 
 We will now consider how the amyloid-beta peptide is formed and the biological mechanisms involved. 
 It turns out the process of creating the amyloid-beta peptide is similar to a full-stick of carrot 
@@ -104,7 +104,10 @@ At this point, we have discussed some of the basic biology behind the amyloid-be
 but we have not yet made explicit the connections between the amyloid-beta peptide and the symptoms 
 associated with Alzheimer’s disease. The question we want to ask is 
 
-> How does the over-accumulation of amyloid-beta peptides found in AD patients contribute to memory loss and neuron death?
+```
+How does the over-accumulation of amyloid-beta peptides found 
+in AD patients contribute to memory loss and neuron death?
+```
 
 It turns out the answer is unclear and a lot of research has been expended to try and figure this question out with 
 only minor progress. In this section, we outline a few ways of approaching this question. 
@@ -167,9 +170,6 @@ Of course, this is only one explanation of Alzheimer’s disease and there is a 
 suggests there are inconsistencies with this explanation. Nevertheless, the amyloid-beta hypothesis continues to be 
 the most popular explanation of Alzheimer’s disease and the direction in which most Alzheimer’s research follows. 
 
-## Notes
-Images courtesy of paper from footnote 1.
-
 [^1]: Road to Restoring Neural Circuits for Treatment of Alzheimer’s Disease [(link)](https://www.ncbi.nlm.nih.gov/pubmed/27830780)
 [^2]: The Cellular Phase of Alzheimer's Disease [(link)](https://www.ncbi.nlm.nih.gov/pubmed/26871627)
-
+[^3]: https://columbiasciencereview.com/2017/04/07/the-role-of-our-immune-system-in-alzheimers/

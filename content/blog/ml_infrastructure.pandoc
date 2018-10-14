@@ -1,0 +1,137 @@
+# Background
+Every organization applies machine learning differently, however, there are a number of common themes that characterize every single machine learning workflow. From a software perspective, these themes should guide the software design of effective machine learning systems. In this blog post, I will share those design themes. These design insights are based on a collection of professional experiences designing real-world machine learning systems for self-driving cars at Uber and computational biology at Carnegie Mellon University (see appendix). These principles are also reflected in [komorebi](https://github.com/andylee024/komorebi), a generic framework for deep learning interfaces that I worked on.
+
+# Key Design Principles
+
+  * **Reproducibility** - Machine learning experiments should be completely reproducible.
+
+  * **More Science, Less Engineering** - A machine learning framework should allow scientists to spend more time understanding and analyzing data (e.g. building models, visualizing trends) and less time engineering (e.g. generating and managing datasets, building debugging tools). 
+
+  * **Enable data intuition** - A machine learning framework should provide visualization and metrics for data scientists to understand data trends and draw insights quickly and effectively from multiple experiments. 
+
+  * **Scale and Speed** - A machine learning platform should allow training with large amounts of data and quick training times. 
+
+# Architecture
+This is a visual diagram of a machine learning system that I would design. Note the separation of independent components. Each component (which I sometimes refer to as layers) serves a single purpose that enables one part of an effective end-to-end machine learning solution. In the sections that follow, I will describe the purpose and design of each of these components and how they fit back into the overall system. Specifically, I will cover the following 3 points for each module.
+
+  * **Motivation** - What machine learning problem motivates this software layer?
+
+  * **Purpose** - What purpose or abstraction does this software layer serve?
+
+  * **Design Considerations** - What are some design considerations that is needed to implement this software layer effectively?
+
+![](/assets/ml_infrastructure/ml_overall_layer.jpg "overall"){width=500px, height=500px}
+*Figure: A general architecture for machine learning systems*
+
+### Dataset Layer
+
+![](/assets/ml_infrastructure/ml_dataset_layer.jpg "dataset"){width=500px, height=500px}
+*Figure: Dataset generation for machine learning systems*
+
+**Motivation**
+For a machine learning scientist to train a model, raw data must be cleaned and transformed into a format that is amenable for machine learning. At scale, this process introduces two engineering problems. First, how do you train a model on large amounts of data that cannot be stored in memory? Second, how do you track the transformations done on a dataset for reproducibility.
+
+**Purpose**
+The dataset layer provides an abstraction layer so that machine learning scientists can access, clean and transform raw data into data to be used for their machine learning applications and reproduce the steps.
+
+**Design Consideration**
+
+  * *Dataset Generation* - This submodule should take care of typical dataset processing procedures required for preparing the data.
+
+  * *Dataset Explorer* - This submodule provides a way for data scientists to understand the raw data before jumping into building models.
+
+  * *Dataset Storage* - This submodule handles the functionality of storing large amounts of data in either the cloud or a data center so that it can be easily queried and accessed for machine learning experiments. In addition, versioning should provide a way for transformations on datasets (normalization, augmentation) to be tracked so that data tied to experiments are reproducible.
+
+### Model Specification Layer
+
+![](/assets/ml_infrastructure/ml_model_layer.jpg "model"){width=500px, height=500px}
+*Figure: Model specification for machine learning systems*
+
+**Motivation**
+A machine learning scientist needs to pick a type of model to train on (random forests, neural network). In order to reproduce any machine learning result, this implies the need for a configuration file to track the specification of a model and the parameters that characterize the model.
+
+**Purpose**
+The model specification layer provides an abstraction layer for machine learning scientists to specify a model architecture. This enables reproducibility and rapid experimentation (searching for optimal hyperparameters, A/B testing, etc.). 
+
+**Design Considerations**
+
+  * *Types of Models* - In general, there are 3 types of models (experiemntal, trained, production), each of which needs to be handled differently.
+
+  * *Model Tagging* - The model tagging module provides a common interface for specifying model architecture and the information required to reproduce the model. For example, a trained model should have a version number that identifies the experiment used to arrive at this model, its underlying architecture, metadata that is useful for scientists to understand the context of this model and metrics associated with the evaluation of this model. All this information should be provided through a common data structure that holds all this information.
+
+  * *Model Registry* - This is a general API or database that holds each individual model and associated information mentioned in the model tagging component.
+
+### Model Training Layer
+
+![](/assets/ml_infrastructure/ml_training_layer.jpg "training"){width=500px, height=500px}
+*Figure: Model training for machine learning systems*
+
+**Motivation**
+Once a dataset and model architecture has been specified, we need to train a model. Training, however, presents a host of engineering problems. Are you going to do single node or distributed training? How do you coordinate your cluster resources and load data effectively? How do you track the gradient updates of all your nodes if you do distributed training?
+
+**Purpose**
+The model training layer provides an abstraction layer for machine learning scientists to train their models without having to worry about how to actually implement the details of this training procedure. The API should be simple: specify a dataset, model architecture and model training configuation and receive a trained model output along with some data about how the training performed.
+
+**Implementation Details**
+
+  * *Model Training* - This submodule provides various model training services (unit-test a model, distributed training, single node training).
+
+  * *Model Training Output* - This is a common data structure for communicating relevant data in a single training run.
+
+### Evaluation layer
+
+![](/assets/ml_infrastructure/ml_evaluation_layer.jpg "evaluation"){width=500px, height=500px}
+*Figure: Model evaluation for machine learning systems*
+
+**Motivation**
+Once a model has been trained, it needs to be evaluated on a test dataset using a number of metrics.
+
+**Purpose**
+The evaluation layer provides an abstraction layer for machine learning scientists to evaluate their models. The API should work as follows: scientists specify the model, evaluation dataset and the evaluation metrics/visualizations that they want to see. The output is a data structure holding the results of this evaluation.
+
+**Design Considerations**
+
+  * *Model Evaluation* - This submodule simply evaluates the model on the dataset and generates the requested metrics and visualizations. The design of this system should contain relevant services for common metrics and visualizations that scientists are interested in as well as a way for scientists to write custom metrics and visualizations.
+
+  * *Evaluation Output* - This defines a data structure that holds all the results of the evaluation process.
+
+### Experiment Layer
+
+![](/assets/ml_infrastructure/ml_experiment_layer.jpg "experiment"){width=500px, height=500px}
+*Figure: Experimentation for machine learning systems*
+
+**Motivation**
+Often in machine learning applications, we would like a way to compare models side-by-side to see how they perform in comparison to each other.
+
+**Purpose**
+The experiment layer provides an abstraction layer to compare models so that they can be A/B tested. This layer should support the comparison of multiple models along side multiple datasets.
+
+**Design Considerations**
+
+  * *Experiment Services* - This submodule provides services to effectively compare models. The exact implementation will require on specific use-cases.
+
+  * *Experiment Output* - This is a data structure that summarizes either a single experiment or multiple experiments so that data scientists can understand the implications of their trained models.
+
+# Conclusion
+In this post, I covered some basic principles that should guide any machine learning system. In particular, I described the APIs and data structures that characterize these principles. There are some great resources for learning more about the design of machine learning frameworks based on some existing frameworks [^1], [^2].
+
+# Appendix
+
+## Projects, Experiences and Credibility
+In the spirit of full-transparency, I think it's important to highlight 3 professional experiences that have shaped my perspective on machine learning software design. For readers, this should allow you to judge the weight of my technical opinions (which are solely mine and not those of my employer).
+
+**Inverse Reinforcement Learning** (Uber ATG - Motion Planning team)
+
+On the motion planning team at Uber ATG, I, with [Chip Hogg](http://chogg.name/about/), codesigned and implemented software infrastructure to support large-scale inverse reinforcement learning (patented) for our motion planning system. Inverse reinforcement learning is a machine learning technique that allows Uber to leverage thousands of human-driven miles to radically improve its autonomy system.
+
+**Simulation for Deep Learning** (Uber ATG - Machine Learning team)
+
+On the machine learning team at Uber ATG, I, with [Igor Filippov](https://www.linkedin.com/in/igor-filippov-19bab66b/) and [Pete Melick](https://www.linkedin.com/in/peter-melick-58864436/), codesigned and implemented software infrastructure to support simulation systems that validate a number of deep learning based self-driving models.
+
+**Deep Learning for Biology** (Carnegie Mellon - Neurogenomics Laboratory)
+
+As a collaborator of the neurogenomics laboratory, I designed and implemented a general software framework for deep learning to enable the lab to rapidly design and experiment with machine learning models for a host of applications (identifying drug-targets for Alzheimer’s, understanding regulatory effects of DNA mutations). This [deep learning software](https://github.com/andylee024/komorebi) 
+is open sourced and I think it is very representative of my software engineering abilities.
+
+[^1]: [Uber's Michaelangelo](https://eng.uber.com/michelangelo/) 
+[^2]: [Facebook Learner](https://code.fb.com/core-data/introducing-fblearner-flow-facebook-s-ai-backbone/)

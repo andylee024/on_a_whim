@@ -1,0 +1,5 @@
+title: Software Design for Machine Learning
+kind: article
+created_at: 2017-10-10 00:00
+abstract: There are common software design concepts that should underlie every machine learning system. This post explains and outlines those concepts.
+short_url: ml_infrastructure
